@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Assignment 1</title>
+    <style>
+      .item span{
+        position: absolute;
+        right: 20px;
+        font-family: Arial;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+
+      }
+      .item span:hover{
+        background: rgb(221, 50, 50);
+        border-radius: 50%;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+      }
+
+
+      div div:nth-child(odd){
+        background-color: rgb(215, 215, 215);
+      }
+      div div:nth-child(even){
+        background-color: rgb(240, 240, 240);
+      }
+      .item {
+        padding: 10px;
+        padding-left: 40px;
+      }
+      #container{
+        margin-top: 20px;
+      }
+      #delete-all-btn{
+        margin-top: 15px;
+        position: absolute;
+        right: 8px;
+        border:solid;
+        border-radius: 2px;
+        padding-right: 8px;
+        padding-left: 8px;
+      }
+      #delete-all-btn:hover{
+        background: rgb(221, 50, 50);
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+      }
+      input{
+        width:30%;
+      }
+      input , button {
+        height: 40px;
+      }
+      button{
+        width:3%;
+        color:rgb(255, 255, 255);
+        background-color: rgb(63, 113, 189);
+        border: none;
+      }
+      button:hover{
+        cursor: pointer;
+        background-color: rgb(53, 110, 180);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My ToDo List App</h1>
+    <input id="textInput" type="text" name="" placeholder=" A new item...">
+    <button type="button" name="button" onclick="add()"> Add </button>
+    <div id="container"></div>
+    <span id="delete-all-btn" onclick="deleteAll()">Delete all</span>
+
+    <script type="text/javascript">
+      var newList = document.getElementById("textInput");
+      var container = document.getElementById("container");
+
+      function add(){
+        var itemText = document.createTextNode(newList.value);
+        newList.value=null;
+        var newItem = document.createElement("div");
+        newItem.className = "item";
+        newItem.appendChild(itemText);
+
+        var deleteBtn = document.createElement("span");
+        deleteBtn.appendChild(document.createTextNode('x'));
+        deleteBtn.onclick = function (){
+          var temp = this.parentElement;
+          temp.parentElement.removeChild(temp);
+        }
+        newItem.appendChild(deleteBtn);
+
+        container.appendChild(newItem);
+      }
+       function deleteAll(){
+         var items = document.getElementById("container").children;
+         for(var i = items.length-1; i >= 0; i--){
+           container.removeChild(items[i]);
+         }
+       }
+    </script>
+  </body>
+</html>
